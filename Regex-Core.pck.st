@@ -1,6 +1,6 @@
-'From Cuis 5.0 [latest update: #4689] on 2 August 2021 at 6:39:42 pm'!
+'From Cuis 5.0 [latest update: #4689] on 2 August 2021 at 6:48:17 pm'!
 'Description Please enter a description for this package '!
-!provides: 'Regex-Core' 1 1!
+!provides: 'Regex-Core' 1 2!
 SystemOrganization addCategory: 'Regex-Core-Exceptions'!
 SystemOrganization addCategory: 'Regex-Core'!
 
@@ -1165,6 +1165,12 @@ sameAs: aCharacter
 	^self asLowercase == aCharacter asLowercase
 	
 ! !
+
+!Collection methodsFor: '*Regex-Core' stamp: 'NM 8/2/2021 18:47:18'!
+contains: aBlock
+       "From Squeak. "
+	"VW compatibility"
+	^self anySatisfy: aBlock! !
 
 !String methodsFor: '*Regex-Core' stamp: 'gsa 12/20/2012 10:31'!
 allRangesOfRegexMatches: rxString
