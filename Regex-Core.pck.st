@@ -1,268 +1,268 @@
-'From Cuis 5.0 [latest update: #4689] on 2 August 2021 at 6:53:31 pm'!
+'From Cuis 5.0 [latest update: #4689] on 2 August 2021 at 7:50:22 pm'!
 'Description Please enter a description for this package '!
-!provides: 'Regex-Core' 1 3!
+!provides: 'Regex-Core' 1 4!
 !requires: 'Cuis-Base' 50 4689 nil!
-SystemOrganization addCategory: 'Regex-Core-Exceptions'!
-SystemOrganization addCategory: 'Regex-Core'!
+SystemOrganization addCategory: #'Regex-Core'!
+SystemOrganization addCategory: #'Regex-Core-Exceptions'!
 
 
-!classDefinition: #RegexError category: 'Regex-Core-Exceptions'!
+!classDefinition: #RegexError category: #'Regex-Core-Exceptions'!
 Error subclass: #RegexError
 	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Regex-Core-Exceptions'!
-!classDefinition: 'RegexError class' category: 'Regex-Core-Exceptions'!
+!classDefinition: 'RegexError class' category: #'Regex-Core-Exceptions'!
 RegexError class
 	instanceVariableNames: ''!
 
-!classDefinition: #RegexCompilationError category: 'Regex-Core-Exceptions'!
+!classDefinition: #RegexCompilationError category: #'Regex-Core-Exceptions'!
 RegexError subclass: #RegexCompilationError
 	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Regex-Core-Exceptions'!
-!classDefinition: 'RegexCompilationError class' category: 'Regex-Core-Exceptions'!
+!classDefinition: 'RegexCompilationError class' category: #'Regex-Core-Exceptions'!
 RegexCompilationError class
 	instanceVariableNames: ''!
 
-!classDefinition: #RegexMatchingError category: 'Regex-Core-Exceptions'!
+!classDefinition: #RegexMatchingError category: #'Regex-Core-Exceptions'!
 RegexError subclass: #RegexMatchingError
 	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Regex-Core-Exceptions'!
-!classDefinition: 'RegexMatchingError class' category: 'Regex-Core-Exceptions'!
+!classDefinition: 'RegexMatchingError class' category: #'Regex-Core-Exceptions'!
 RegexMatchingError class
 	instanceVariableNames: ''!
 
-!classDefinition: #RegexSyntaxError category: 'Regex-Core-Exceptions'!
+!classDefinition: #RegexSyntaxError category: #'Regex-Core-Exceptions'!
 RegexError subclass: #RegexSyntaxError
 	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Regex-Core-Exceptions'!
-!classDefinition: 'RegexSyntaxError class' category: 'Regex-Core-Exceptions'!
+!classDefinition: 'RegexSyntaxError class' category: #'Regex-Core-Exceptions'!
 RegexSyntaxError class
 	instanceVariableNames: ''!
 
-!classDefinition: #RxCharSetParser category: 'Regex-Core'!
+!classDefinition: #RxCharSetParser category: #'Regex-Core'!
 Object subclass: #RxCharSetParser
 	instanceVariableNames: 'source lookahead elements'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Regex-Core'!
-!classDefinition: 'RxCharSetParser class' category: 'Regex-Core'!
+!classDefinition: 'RxCharSetParser class' category: #'Regex-Core'!
 RxCharSetParser class
 	instanceVariableNames: ''!
 
-!classDefinition: #RxMatchOptimizer category: 'Regex-Core'!
+!classDefinition: #RxMatchOptimizer category: #'Regex-Core'!
 Object subclass: #RxMatchOptimizer
 	instanceVariableNames: 'ignoreCase prefixes nonPrefixes conditions testBlock methodPredicates nonMethodPredicates predicates nonPredicates'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Regex-Core'!
-!classDefinition: 'RxMatchOptimizer class' category: 'Regex-Core'!
+!classDefinition: 'RxMatchOptimizer class' category: #'Regex-Core'!
 RxMatchOptimizer class
 	instanceVariableNames: ''!
 
-!classDefinition: #RxMatcher category: 'Regex-Core'!
+!classDefinition: #RxMatcher category: #'Regex-Core'!
 Object subclass: #RxMatcher
 	instanceVariableNames: 'matcher ignoreCase startOptimizer stream markerPositions markerCount lastResult'
 	classVariableNames: 'Cr Lf'
 	poolDictionaries: ''
 	category: 'Regex-Core'!
-!classDefinition: 'RxMatcher class' category: 'Regex-Core'!
+!classDefinition: 'RxMatcher class' category: #'Regex-Core'!
 RxMatcher class
 	instanceVariableNames: ''!
 
-!classDefinition: #RxParser category: 'Regex-Core'!
+!classDefinition: #RxParser category: #'Regex-Core'!
 Object subclass: #RxParser
 	instanceVariableNames: 'input lookahead'
 	classVariableNames: 'BackslashConstants BackslashSpecials'
 	poolDictionaries: ''
 	category: 'Regex-Core'!
-!classDefinition: 'RxParser class' category: 'Regex-Core'!
+!classDefinition: 'RxParser class' category: #'Regex-Core'!
 RxParser class
 	instanceVariableNames: ''!
 
-!classDefinition: #RxmLink category: 'Regex-Core'!
+!classDefinition: #RxmLink category: #'Regex-Core'!
 Object subclass: #RxmLink
 	instanceVariableNames: 'next'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Regex-Core'!
-!classDefinition: 'RxmLink class' category: 'Regex-Core'!
+!classDefinition: 'RxmLink class' category: #'Regex-Core'!
 RxmLink class
 	instanceVariableNames: ''!
 
-!classDefinition: #RxmBranch category: 'Regex-Core'!
+!classDefinition: #RxmBranch category: #'Regex-Core'!
 RxmLink subclass: #RxmBranch
 	instanceVariableNames: 'loopback alternative'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Regex-Core'!
-!classDefinition: 'RxmBranch class' category: 'Regex-Core'!
+!classDefinition: 'RxmBranch class' category: #'Regex-Core'!
 RxmBranch class
 	instanceVariableNames: ''!
 
-!classDefinition: #RxmMarker category: 'Regex-Core'!
+!classDefinition: #RxmMarker category: #'Regex-Core'!
 RxmLink subclass: #RxmMarker
 	instanceVariableNames: 'index'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Regex-Core'!
-!classDefinition: 'RxmMarker class' category: 'Regex-Core'!
+!classDefinition: 'RxmMarker class' category: #'Regex-Core'!
 RxmMarker class
 	instanceVariableNames: ''!
 
-!classDefinition: #RxmPredicate category: 'Regex-Core'!
+!classDefinition: #RxmPredicate category: #'Regex-Core'!
 RxmLink subclass: #RxmPredicate
 	instanceVariableNames: 'predicate'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Regex-Core'!
-!classDefinition: 'RxmPredicate class' category: 'Regex-Core'!
+!classDefinition: 'RxmPredicate class' category: #'Regex-Core'!
 RxmPredicate class
 	instanceVariableNames: ''!
 
-!classDefinition: #RxmSpecial category: 'Regex-Core'!
+!classDefinition: #RxmSpecial category: #'Regex-Core'!
 RxmLink subclass: #RxmSpecial
 	instanceVariableNames: 'matchSelector'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Regex-Core'!
-!classDefinition: 'RxmSpecial class' category: 'Regex-Core'!
+!classDefinition: 'RxmSpecial class' category: #'Regex-Core'!
 RxmSpecial class
 	instanceVariableNames: ''!
 
-!classDefinition: #RxmSubstring category: 'Regex-Core'!
+!classDefinition: #RxmSubstring category: #'Regex-Core'!
 RxmLink subclass: #RxmSubstring
 	instanceVariableNames: 'sample compare'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Regex-Core'!
-!classDefinition: 'RxmSubstring class' category: 'Regex-Core'!
+!classDefinition: 'RxmSubstring class' category: #'Regex-Core'!
 RxmSubstring class
 	instanceVariableNames: ''!
 
-!classDefinition: #RxmTerminator category: 'Regex-Core'!
+!classDefinition: #RxmTerminator category: #'Regex-Core'!
 Object subclass: #RxmTerminator
 	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Regex-Core'!
-!classDefinition: 'RxmTerminator class' category: 'Regex-Core'!
+!classDefinition: 'RxmTerminator class' category: #'Regex-Core'!
 RxmTerminator class
 	instanceVariableNames: ''!
 
-!classDefinition: #RxsNode category: 'Regex-Core'!
+!classDefinition: #RxsNode category: #'Regex-Core'!
 Object subclass: #RxsNode
 	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Regex-Core'!
-!classDefinition: 'RxsNode class' category: 'Regex-Core'!
+!classDefinition: 'RxsNode class' category: #'Regex-Core'!
 RxsNode class
 	instanceVariableNames: ''!
 
-!classDefinition: #RxsBranch category: 'Regex-Core'!
+!classDefinition: #RxsBranch category: #'Regex-Core'!
 RxsNode subclass: #RxsBranch
 	instanceVariableNames: 'piece branch'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Regex-Core'!
-!classDefinition: 'RxsBranch class' category: 'Regex-Core'!
+!classDefinition: 'RxsBranch class' category: #'Regex-Core'!
 RxsBranch class
 	instanceVariableNames: ''!
 
-!classDefinition: #RxsCharSet category: 'Regex-Core'!
+!classDefinition: #RxsCharSet category: #'Regex-Core'!
 RxsNode subclass: #RxsCharSet
 	instanceVariableNames: 'negated elements'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Regex-Core'!
-!classDefinition: 'RxsCharSet class' category: 'Regex-Core'!
+!classDefinition: 'RxsCharSet class' category: #'Regex-Core'!
 RxsCharSet class
 	instanceVariableNames: ''!
 
-!classDefinition: #RxsCharacter category: 'Regex-Core'!
+!classDefinition: #RxsCharacter category: #'Regex-Core'!
 RxsNode subclass: #RxsCharacter
 	instanceVariableNames: 'character'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Regex-Core'!
-!classDefinition: 'RxsCharacter class' category: 'Regex-Core'!
+!classDefinition: 'RxsCharacter class' category: #'Regex-Core'!
 RxsCharacter class
 	instanceVariableNames: ''!
 
-!classDefinition: #RxsContextCondition category: 'Regex-Core'!
+!classDefinition: #RxsContextCondition category: #'Regex-Core'!
 RxsNode subclass: #RxsContextCondition
 	instanceVariableNames: 'kind'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Regex-Core'!
-!classDefinition: 'RxsContextCondition class' category: 'Regex-Core'!
+!classDefinition: 'RxsContextCondition class' category: #'Regex-Core'!
 RxsContextCondition class
 	instanceVariableNames: ''!
 
-!classDefinition: #RxsEpsilon category: 'Regex-Core'!
+!classDefinition: #RxsEpsilon category: #'Regex-Core'!
 RxsNode subclass: #RxsEpsilon
 	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Regex-Core'!
-!classDefinition: 'RxsEpsilon class' category: 'Regex-Core'!
+!classDefinition: 'RxsEpsilon class' category: #'Regex-Core'!
 RxsEpsilon class
 	instanceVariableNames: ''!
 
-!classDefinition: #RxsMessagePredicate category: 'Regex-Core'!
+!classDefinition: #RxsMessagePredicate category: #'Regex-Core'!
 RxsNode subclass: #RxsMessagePredicate
 	instanceVariableNames: 'selector negated'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Regex-Core'!
-!classDefinition: 'RxsMessagePredicate class' category: 'Regex-Core'!
+!classDefinition: 'RxsMessagePredicate class' category: #'Regex-Core'!
 RxsMessagePredicate class
 	instanceVariableNames: ''!
 
-!classDefinition: #RxsPiece category: 'Regex-Core'!
+!classDefinition: #RxsPiece category: #'Regex-Core'!
 RxsNode subclass: #RxsPiece
 	instanceVariableNames: 'atom min max'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Regex-Core'!
-!classDefinition: 'RxsPiece class' category: 'Regex-Core'!
+!classDefinition: 'RxsPiece class' category: #'Regex-Core'!
 RxsPiece class
 	instanceVariableNames: ''!
 
-!classDefinition: #RxsPredicate category: 'Regex-Core'!
+!classDefinition: #RxsPredicate category: #'Regex-Core'!
 RxsNode subclass: #RxsPredicate
 	instanceVariableNames: 'predicate negation'
 	classVariableNames: 'EscapedLetterSelectors NamedClassSelectors'
 	poolDictionaries: ''
 	category: 'Regex-Core'!
-!classDefinition: 'RxsPredicate class' category: 'Regex-Core'!
+!classDefinition: 'RxsPredicate class' category: #'Regex-Core'!
 RxsPredicate class
 	instanceVariableNames: ''!
 
-!classDefinition: #RxsRange category: 'Regex-Core'!
+!classDefinition: #RxsRange category: #'Regex-Core'!
 RxsNode subclass: #RxsRange
 	instanceVariableNames: 'first last'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Regex-Core'!
-!classDefinition: 'RxsRange class' category: 'Regex-Core'!
+!classDefinition: 'RxsRange class' category: #'Regex-Core'!
 RxsRange class
 	instanceVariableNames: ''!
 
-!classDefinition: #RxsRegex category: 'Regex-Core'!
+!classDefinition: #RxsRegex category: #'Regex-Core'!
 RxsNode subclass: #RxsRegex
 	instanceVariableNames: 'branch regex'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Regex-Core'!
-!classDefinition: 'RxsRegex class' category: 'Regex-Core'!
+!classDefinition: 'RxsRegex class' category: #'Regex-Core'!
 RxsRegex class
 	instanceVariableNames: ''!
 
@@ -534,8 +534,9 @@ search: aString	"Search the string for occurrence of something matching myself.
 !RxMatcher methodsFor: 'accessing' stamp: 'lr 1/15/2010 21:45'!
 searchStream: aStream	"Search the stream for occurrence of something matching myself.	After the search has occurred, stop positioned after the end of the	matched substring. Answer a Boolean indicating success."	| position |	stream := aStream.	position := aStream position.	markerPositions := nil.	[aStream atEnd] whileFalse:		[self tryMatch ifTrue: [^true].		aStream position: position; next.		position := aStream position].	"Try match at the very stream end too!!"	self tryMatch ifTrue: [^true]. 	^false! !
 
-!RxMatcher methodsFor: 'accessing' stamp: 'jannik.laval 5/2/2010 06:53'!
-split: aString	| result lastPosition |	result := OrderedCollection new.	stream := aString readStream.	lastPosition := stream position.	[ self searchStream: stream ] whileTrue:		[ result add: (aString copyFrom: lastPosition+1 to: (self subBeginning: 1) first).		[lastPosition < stream position] assertWithDescription: 'Regex cannot match null string'.		lastPosition := stream position ].	result add: (aString copyFrom: lastPosition+1 to: aString size).	^ result! !
+!RxMatcher methodsFor: 'accessing' stamp: 'NM 8/2/2021 19:48:52'!
+split: aString	| result lastPosition |	result := OrderedCollection new.	stream := aString readStream.	lastPosition := stream position.	[ self searchStream: stream ] whileTrue:		[ result add: (aString copyFrom: lastPosition+1 to: (self subBeginning: 1) first).		"[lastPosition < stream position] assertWithDescription: 'Regex cannot match null string'.  "
+		[lastPosition < stream position] assert.		lastPosition := stream position ].	result add: (aString copyFrom: lastPosition+1 to: aString size).	^ result! !
 
 !RxMatcher methodsFor: 'accessing' stamp: 'vb 4/11/09 21:56'!
 subBeginning: subIndex	^markerPositions at: subIndex * 2 - 1! !
@@ -1152,21 +1153,6 @@ initializeBranch: aBranch regex: aRegex	"See class comment for instance variabl
 !RxsRegex methodsFor: 'testing' stamp: 'vb 4/11/09 21:56'!
 isNullable	^branch isNullable or: [regex notNil and: [regex isNullable]]! !
 
-!Character methodsFor: '*Regex-Core' stamp: 'NM 8/2/2021 18:34:24'!
-asInteger
-	"From Squeak"
-	"Answer the receiver's character code."
-	<primitive: 171>
-	^self primitiveFailed! !
-
-!Character methodsFor: '*Regex-Core' stamp: 'NM 8/2/2021 18:32:35'!
-sameAs: aCharacter
-	"From Squeak Answer whether the receiver is equal to aCharacter, ignoring case"
-	self == aCharacter ifTrue: [ ^true ].
-	^self asLowercase == aCharacter asLowercase
-	
-! !
-
 !Collection methodsFor: '*Regex-Core' stamp: 'NM 8/2/2021 18:47:18'!
 contains: aBlock
        "From Squeak. "
@@ -1265,6 +1251,21 @@ regex: rxString matchesDo: aBlock
 search: aString
 	"compatibility method to make regexp and strings work polymorphicly"
 	^ aString includesSubString: self! !
+
+!Character methodsFor: '*Regex-Core' stamp: 'NM 8/2/2021 18:34:24'!
+asInteger
+	"From Squeak"
+	"Answer the receiver's character code."
+	<primitive: 171>
+	^self primitiveFailed! !
+
+!Character methodsFor: '*Regex-Core' stamp: 'NM 8/2/2021 18:32:35'!
+sameAs: aCharacter
+	"From Squeak Answer whether the receiver is equal to aCharacter, ignoring case"
+	self == aCharacter ifTrue: [ ^true ].
+	^self asLowercase == aCharacter asLowercase
+	
+! !
 RxMatcher initialize!
 RxParser initialize!
 RxsPredicate initialize!
