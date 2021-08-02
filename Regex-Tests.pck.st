@@ -1,22 +1,27 @@
-'From Cuis 4.1 of 12 December 2012 [latest update: #1524] on 30 December 2012 at 6:01:06 pm'!
+'From Cuis 5.0 [latest update: #4689] on 2 August 2021 at 6:54:01 pm'!
 'Description Please enter a description for this package '!
-!classDefinition: #RxMatcherTest category: #'Regex-Tests-Core'!
+!provides: 'Regex-Tests' 1 1!
+!requires: 'Regex-Core' 1 3 nil!
+SystemOrganization addCategory: 'Regex-Tests-Core'!
+
+
+!classDefinition: #RxMatcherTest category: 'Regex-Tests-Core'!
 TestCase subclass: #RxMatcherTest
 	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Regex-Tests-Core'!
-!classDefinition: 'RxMatcherTest class' category: #'Regex-Tests-Core'!
+!classDefinition: 'RxMatcherTest class' category: 'Regex-Tests-Core'!
 RxMatcherTest class
 	instanceVariableNames: ''!
 
-!classDefinition: #RxParserTest category: #'Regex-Tests-Core'!
+!classDefinition: #RxParserTest category: 'Regex-Tests-Core'!
 TestCase subclass: #RxParserTest
 	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Regex-Tests-Core'!
-!classDefinition: 'RxParserTest class' category: #'Regex-Tests-Core'!
+!classDefinition: 'RxParserTest class' category: 'Regex-Tests-Core'!
 RxParserTest class
 	instanceVariableNames: ''!
 
@@ -27,18 +32,11 @@ This class provides tests for the regular expression matcher.!
 !RxParserTest commentStamp: 'Tbn 11/12/2010 22:31' prior: 0!
 This class provides tests for the regular expression parser.!
 
-!RxMatcherTest methodsFor: 'utilties' stamp: 'TestRunner 1/15/2010 19:38'!
-compileRegex: aString	"Compile the regex and answer the matcher, or answer nil if compilation fails."	| syntaxTree |	syntaxTree := self parserClass safelyParse: aString.	^ syntaxTree isNil ifFalse: [ self matcherClass for: syntaxTree ]! !
-
-!RxMatcherTest methodsFor: 'testing-henry' stamp: 'lr 1/15/2010 19:46'!
-henryReadme	self error: 'The tests in this category are based on the ones in Henry Spencer''s regexp.c package.'! !
-
-!RxMatcherTest methodsFor: 'accessing' stamp: 'gsa 12/22/2012 12:25'!
-matcherClass
-	^ RxMatcher! !
-
 !RxMatcherTest methodsFor: 'accessing' stamp: 'lr 1/15/2010 19:39'!
 parserClass	^ RxParser! !
+
+!RxMatcherTest methodsFor: 'utilties' stamp: 'TestRunner 1/15/2010 19:38'!
+compileRegex: aString	"Compile the regex and answer the matcher, or answer nil if compilation fails."	| syntaxTree |	syntaxTree := self parserClass safelyParse: aString.	^ syntaxTree isNil ifFalse: [ self matcherClass for: syntaxTree ]! !
 
 !RxMatcherTest methodsFor: 'utilties' stamp: 'gsa 12/22/2012 12:26'!
 runMatcher: aMatcher with: aString expect: aBoolean withSubexpressions: anArray
@@ -67,71 +65,8 @@ runMatcher: aMatcher with: aString expect: aBoolean withSubexpressions: anArray
 !RxMatcherTest methodsFor: 'utilties' stamp: 'lr 1/15/2010 19:31'!
 runRegex: anArray	"Run a clause anArray against a set of tests. Each clause is an array with a regex source string followed by sequence of 3-tuples. Each three-element group is one test to try against the regex, and includes: 1) test string; 2) expected result; 3) expected subexpression as an array of (index, substring), or nil."	| source matcher |	source := anArray first.	matcher := self compileRegex: source.	matcher isNil		ifTrue: [			(anArray at: 2) isNil				ifFalse: [ self signalFailure: 'Compilation failed, should have succeeded: ' , source printString ] ]		ifFalse: [			(anArray at: 2) isNil				ifTrue: [ self signalFailure: 'Compilation succeeded, should have failed: ' , source printString ]				ifFalse: [					2 to: anArray size by: 3 do: [ :index | 						self 							runMatcher: matcher							with: (anArray at: index)							expect: (anArray at: index + 1)							withSubexpressions: (anArray at: index + 2) ] ] ]! !
 
-!RxMatcherTest methodsFor: 'testing-protocol' stamp: 'lr 1/15/2010 20:28'!
-testCaseInsensitive	| matcher |	matcher := self matcherClass forString: 'the quick brown fox' ignoreCase: true.	self assert: (matcher search: 'the quick brown fox').	self assert: (matcher search: 'The quick brown FOX').	self assert: (matcher search: 'What do you know about the quick brown fox?').	self assert: (matcher search: 'What do you know about THE QUICK BROWN FOX?')! !
-
-!RxMatcherTest methodsFor: 'testing-protocol' stamp: 'lr 1/15/2010 20:28'!
-testCaseSensitive	| matcher |	matcher := self matcherClass forString: 'the quick brown fox' ignoreCase: false.	self assert: (matcher search: 'the quick brown fox').	self deny: (matcher search: 'The quick brown FOX').	self assert: (matcher search: 'What do you know about the quick brown fox?').	self deny: (matcher search: 'What do you know about THE QUICK BROWN FOX?')! !
-
-!RxMatcherTest methodsFor: 'testing-protocol' stamp: 'lr 1/15/2010 20:38'!
-testCopyReplacingMatches	"See that the match context is preserved while copying stuff between matches:"		| matcher |	matcher := self matcherClass forString: '\<\d\D+'.	self assert: (matcher copy: '9aaa1bbb 8ccc' replacingMatchesWith: 'foo')		= 'foo1bbb foo'! !
-
-!RxMatcherTest methodsFor: 'testing-protocol' stamp: 'hfm 4/2/2010 13:52'!
-testCopyTranslatingMatches	| matcher |	matcher := self matcherClass forString: '\w+'.	self assert: (matcher copy: 'now is  the   time    ' translatingMatchesUsing: [ :each | each reversed ])		= 'won si  eht   emit    '! !
-
-!RxMatcherTest methodsFor: 'testing-empty' stamp: 'gsa 12/20/2012 20:02'!
-testEmptyStringAtBeginningOfLine
-	| matcher |
-	matcher := self matcherClass forString: '^'.
-	self
-		assert: (matcher copy: 'foo1 bar1' , String crString , 'foo2 bar2' replacingMatchesWith: '*')
-			= ('*foo1 bar1' , String crString , '*foo2 bar2')
-		description: 'An empty string at the beginning of a line'! !
-
-!RxMatcherTest methodsFor: 'testing-empty' stamp: 'gsa 12/22/2012 12:34'!
-testEmptyStringAtBeginningOfWord
-	| matcher |
-	matcher := self matcherClass forString: '\<'.
-	self
-		assert: (matcher copy: 'foo bar' replacingMatchesWith: '*')
-			= '*foo *bar'
-		description: 'An empty string at the beginning of a word'! !
-
-!RxMatcherTest methodsFor: 'testing-empty' stamp: 'gsa 12/20/2012 20:02'!
-testEmptyStringAtEndOfLine
-	| matcher |
-	matcher := self matcherClass forString: '$'.
-	self
-		assert: (matcher copy: 'foo1 bar1' , String crString , 'foo2 bar2' replacingMatchesWith: '*')
-			= ('foo1 bar1*', String crString , 'foo2 bar2*')
-		description: 'An empty string at the end of a line'! !
-
-!RxMatcherTest methodsFor: 'testing-empty' stamp: 'gsa 12/22/2012 12:34'!
-testEmptyStringAtEndOfWord
-	| matcher |
-	matcher := self matcherClass forString: '\>'.
-	self
-		assert: (matcher copy: 'foo bar' replacingMatchesWith: '*')
-			= 'foo* bar*'
-		description: 'An empty string at the end of a word'! !
-
-!RxMatcherTest methodsFor: 'testing-empty' stamp: 'gsa 12/22/2012 12:34'!
-testEmptyStringAtWordBoundary
-	| matcher |
-	matcher := self matcherClass forString: '\b'.
-	self
-		assert: (matcher copy: 'foo bar' replacingMatchesWith: '*')
-			= '*foo* *bar*'
-		description: 'An empty string at a word boundary'! !
-
-!RxMatcherTest methodsFor: 'testing-empty' stamp: 'gsa 12/22/2012 12:35'!
-testEmptyStringNotAtWordBoundary
-	| matcher |
-	matcher := self matcherClass forString: '\B'.
-	self
-		assert: (matcher copy: 'foo bar' replacingMatchesWith: '*')
-			= 'f*o*o b*a*r'
-		description: 'An empty string not at a word boundary'! !
+!RxMatcherTest methodsFor: 'testing-henry' stamp: 'lr 1/15/2010 19:46'!
+henryReadme	self error: 'The tests in this category are based on the ones in Henry Spencer''s regexp.c package.'! !
 
 !RxMatcherTest methodsFor: 'testing-henry' stamp: 'lr 1/15/2010 19:46'!
 testHenry001	self runRegex: #('abc'		'abc' true (1 'abc')		'xbc' false nil		'axc' false nil		'abx' false nil		'xabcy' true (1 'abc')		'ababc' true (1 'abc'))! !
@@ -544,6 +479,22 @@ testHenry136	self runRegex: #('(.*)c(.*)' 'abcde' true (1 'abcde' 2 'ab' 3 'de'
 !RxMatcherTest methodsFor: 'testing-henry' stamp: 'lr 1/15/2010 19:46'!
 testHenry137	self runRegex: #('\((.*), (.*)\)' '(a, b)' true (2 'a' 3 'b'))! !
 
+!RxMatcherTest methodsFor: 'accessing' stamp: 'gsa 12/22/2012 12:25'!
+matcherClass
+	^ RxMatcher! !
+
+!RxMatcherTest methodsFor: 'testing-protocol' stamp: 'lr 1/15/2010 20:28'!
+testCaseInsensitive	| matcher |	matcher := self matcherClass forString: 'the quick brown fox' ignoreCase: true.	self assert: (matcher search: 'the quick brown fox').	self assert: (matcher search: 'The quick brown FOX').	self assert: (matcher search: 'What do you know about the quick brown fox?').	self assert: (matcher search: 'What do you know about THE QUICK BROWN FOX?')! !
+
+!RxMatcherTest methodsFor: 'testing-protocol' stamp: 'lr 1/15/2010 20:28'!
+testCaseSensitive	| matcher |	matcher := self matcherClass forString: 'the quick brown fox' ignoreCase: false.	self assert: (matcher search: 'the quick brown fox').	self deny: (matcher search: 'The quick brown FOX').	self assert: (matcher search: 'What do you know about the quick brown fox?').	self deny: (matcher search: 'What do you know about THE QUICK BROWN FOX?')! !
+
+!RxMatcherTest methodsFor: 'testing-protocol' stamp: 'lr 1/15/2010 20:38'!
+testCopyReplacingMatches	"See that the match context is preserved while copying stuff between matches:"		| matcher |	matcher := self matcherClass forString: '\<\d\D+'.	self assert: (matcher copy: '9aaa1bbb 8ccc' replacingMatchesWith: 'foo')		= 'foo1bbb foo'! !
+
+!RxMatcherTest methodsFor: 'testing-protocol' stamp: 'hfm 4/2/2010 13:52'!
+testCopyTranslatingMatches	| matcher |	matcher := self matcherClass forString: '\w+'.	self assert: (matcher copy: 'now is  the   time    ' translatingMatchesUsing: [ :each | each reversed ])		= 'won si  eht   emit    '! !
+
 !RxMatcherTest methodsFor: 'testing-protocol' stamp: 'lr 1/15/2010 20:45'!
 testMatches	| matcher |	matcher := self matcherClass forString: '\w+'.	self assert: (matcher matches: 'now').	self deny: (matcher matches: 'now is')! !
 
@@ -570,6 +521,63 @@ testMatchesStream	| matcher |	matcher := self matcherClass forString: '\w+'.	
 
 !RxMatcherTest methodsFor: 'testing-protocol' stamp: 'TestRunner 1/15/2010 20:51'!
 testMatchingRangesIn	| matcher expected |	matcher := self matcherClass forString: '\w+'.	expected := #(1 3 5 6 8 10 12 15) asOrderedCollection.	(matcher matchingRangesIn: 'now is the time') do: [ :range |		self assert: range first = expected removeFirst.		self assert: range last = expected removeFirst ].	self assert: expected isEmpty! !
+
+!RxMatcherTest methodsFor: 'testing-protocol' stamp: 'lr 1/15/2010 20:55'!
+testSubexpressionCount	| matcher |	#(('a' 1) ('a(b)' 2) ('a(b(c))' 3) ('(a)(b)' 3) ('(a(b))*' 3)) do: [ :pair |		matcher := self matcherClass forString: pair first.		matcher supportsSubexpressions 			ifTrue: [ self assert: matcher subexpressionCount = pair last ] ]! !
+
+!RxMatcherTest methodsFor: 'testing-empty' stamp: 'gsa 12/20/2012 20:02'!
+testEmptyStringAtBeginningOfLine
+	| matcher |
+	matcher := self matcherClass forString: '^'.
+	self
+		assert: (matcher copy: 'foo1 bar1' , String crString , 'foo2 bar2' replacingMatchesWith: '*')
+			= ('*foo1 bar1' , String crString , '*foo2 bar2')
+		description: 'An empty string at the beginning of a line'! !
+
+!RxMatcherTest methodsFor: 'testing-empty' stamp: 'gsa 12/22/2012 12:34'!
+testEmptyStringAtBeginningOfWord
+	| matcher |
+	matcher := self matcherClass forString: '\<'.
+	self
+		assert: (matcher copy: 'foo bar' replacingMatchesWith: '*')
+			= '*foo *bar'
+		description: 'An empty string at the beginning of a word'! !
+
+!RxMatcherTest methodsFor: 'testing-empty' stamp: 'gsa 12/20/2012 20:02'!
+testEmptyStringAtEndOfLine
+	| matcher |
+	matcher := self matcherClass forString: '$'.
+	self
+		assert: (matcher copy: 'foo1 bar1' , String crString , 'foo2 bar2' replacingMatchesWith: '*')
+			= ('foo1 bar1*', String crString , 'foo2 bar2*')
+		description: 'An empty string at the end of a line'! !
+
+!RxMatcherTest methodsFor: 'testing-empty' stamp: 'gsa 12/22/2012 12:34'!
+testEmptyStringAtEndOfWord
+	| matcher |
+	matcher := self matcherClass forString: '\>'.
+	self
+		assert: (matcher copy: 'foo bar' replacingMatchesWith: '*')
+			= 'foo* bar*'
+		description: 'An empty string at the end of a word'! !
+
+!RxMatcherTest methodsFor: 'testing-empty' stamp: 'gsa 12/22/2012 12:34'!
+testEmptyStringAtWordBoundary
+	| matcher |
+	matcher := self matcherClass forString: '\b'.
+	self
+		assert: (matcher copy: 'foo bar' replacingMatchesWith: '*')
+			= '*foo* *bar*'
+		description: 'An empty string at a word boundary'! !
+
+!RxMatcherTest methodsFor: 'testing-empty' stamp: 'gsa 12/22/2012 12:35'!
+testEmptyStringNotAtWordBoundary
+	| matcher |
+	matcher := self matcherClass forString: '\B'.
+	self
+		assert: (matcher copy: 'foo bar' replacingMatchesWith: '*')
+			= 'f*o*o b*a*r'
+		description: 'An empty string not at a word boundary'! !
 
 !RxMatcherTest methodsFor: 'testing' stamp: 'lr 1/15/2010 19:47'!
 testRegex001	self runRegex: #('^.*$' 		'' true (1 '')		'a' true (1 'a')		'abc' true (1 'abc'))! !
@@ -624,9 +632,6 @@ testStringRegexMatchesCollect	| result |	result := 'aabbcc' regex: 'b+' matche
 
 !RxMatcherTest methodsFor: 'testing-extensions' stamp: 'lr 4/23/2010 08:58'!
 testStringRegexMatchesDo	| result |	result := OrderedCollection new.	'aabbcc' regex: 'b+' matchesDo: [ :each | result add: each ].	self assert: result size = 1.	self assert: result first = 'bb'! !
-
-!RxMatcherTest methodsFor: 'testing-protocol' stamp: 'lr 1/15/2010 20:55'!
-testSubexpressionCount	| matcher |	#(('a' 1) ('a(b)' 2) ('a(b(c))' 3) ('(a)(b)' 3) ('(a(b))*' 3)) do: [ :pair |		matcher := self matcherClass forString: pair first.		matcher supportsSubexpressions 			ifTrue: [ self assert: matcher subexpressionCount = pair last ] ]! !
 
 !RxMatcherTest class methodsFor: 'accessing' stamp: 'lr 1/15/2010 19:48'!
 packageNamesUnderTest	^ #('VB-Regex')! !

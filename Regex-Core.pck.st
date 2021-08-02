@@ -1,6 +1,7 @@
-'From Cuis 5.0 [latest update: #4689] on 2 August 2021 at 6:48:17 pm'!
+'From Cuis 5.0 [latest update: #4689] on 2 August 2021 at 6:53:31 pm'!
 'Description Please enter a description for this package '!
-!provides: 'Regex-Core' 1 2!
+!provides: 'Regex-Core' 1 3!
+!requires: 'Cuis-Base' 50 4689 nil!
 SystemOrganization addCategory: 'Regex-Core-Exceptions'!
 SystemOrganization addCategory: 'Regex-Core'!
 
