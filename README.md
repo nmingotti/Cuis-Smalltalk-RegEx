@@ -3,11 +3,8 @@ Cuis-RegEx
 
 Regular Expressions for Cuis
 
-To install in a Cuis 4.1 image:
+Install with ```Feature require: 'Regex-Tests'.``` 
 
-1. Install Cuis-CompatibilityWithOtherSmalltalks
-2. Install RegEx-Core and RegEx-Tests
+All tests are green in Cuis5.0-4689.
 
-The 188 tests are green. 
-
-Last Update: 25/12/2012.
+Last Update: 02/08/2021.
