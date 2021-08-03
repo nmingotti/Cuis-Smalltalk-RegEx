@@ -1,6 +1,6 @@
-'From Cuis 5.0 [latest update: #4689] on 3 August 2021 at 6:15:56 pm'!
+'From Cuis 5.0 [latest update: #4689] on 3 August 2021 at 7:33:35 pm'!
 'Description '!
-!provides: 'Regex' 1 1!
+!provides: 'Regex' 1 4!
 !requires: 'TerseGuide' 1 141 nil!
 !requires: 'Regex-Tests' 1 1 nil!
 SystemOrganization addCategory: 'Regex-Core'!
@@ -286,6 +286,16 @@ RxsNode subclass: #RxsRegex
 	category: 'Regex-Core'!
 !classDefinition: 'RxsRegex class' category: 'Regex-Core'!
 RxsRegex class
+	instanceVariableNames: ''!
+
+!classDefinition: #RxTerseGuide category: 'Regex-Tests-Core'!
+TerseGuideTopic subclass: #RxTerseGuide
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Regex-Tests-Core'!
+!classDefinition: 'RxTerseGuide class' category: 'Regex-Tests-Core'!
+RxTerseGuide class
 	instanceVariableNames: ''!
 
 
@@ -5016,6 +5026,26 @@ initializeBranch: aBranch regex: aRegex
 isNullable
 
 	^branch isNullable or: [regex notNil and: [regex isNullable]]! !
+
+!RxTerseGuide methodsFor: 'as yet unclassified' stamp: 'NM 8/3/2021 19:25:42'!
+examples
+	^ {
+	 {#code -> '''hello123'' matchesRegex: ''he''  ' . #category -> ''.  
+	  #description -> '# => false !! The regex does not match ALL the string.' } as: Dictionary. 
+	
+	 {#code -> '''hello123'' matchesRegex: ''he.*'' '    . #category -> ''.  
+	  #description -> '# => ture !! The regex now can match ALL the string.' } as: Dictionary.       
+	 
+        {#code ->  ''' 2019-08-01T00:00:00+00:00'' allRegexMatches: ''\d+''. ' . #category -> ''.  
+	  #description -> '# => getting all numeric substrings.' } as: Dictionary.       
+    
+
+        }! !
+
+!RxTerseGuide methodsFor: 'as yet unclassified' stamp: 'NM 8/3/2021 18:34:40'!
+title
+	^ 'Regex'
+	! !
 
 !Character methodsFor: '*Regex-Core' stamp: 'NM 8/2/2021 18:34:24'!
 asInteger
