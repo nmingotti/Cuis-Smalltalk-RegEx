@@ -22,7 +22,7 @@ All tests are green in Cuis5.0-4689.
 
 ## Documentation 
 
-The package contains a good amount of documentation from me and from the original author. Please open **World->Help->TerseGuide** and see section **Regex** to get started. 
+The package contains a good amount of documentation from me and from the original author 'Vassili Bykov'. Please open **World->Help->TerseGuide** and see section **Regex** to get started. 
 
 
 ## Extra
