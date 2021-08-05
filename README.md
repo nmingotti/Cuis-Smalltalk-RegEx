@@ -22,9 +22,7 @@ All tests are green in Cuis5.0-4689.
 
 ## Documentation 
 
-The documentation should be accessible in the World without using the web. 
-
-. A documentation stub is in the *TesrseGuide*
+The package contains a good amount of documentation from me and from the original author. Please open **World->Help->TerseGuide** and see section **Regex** to get started. 
 
 
 ## Extra
