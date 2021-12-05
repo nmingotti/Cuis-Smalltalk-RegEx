@@ -25,6 +25,8 @@ All tests are green in Cuis5.0-4689.
 The package contains a good amount of documentation from me and from the original author 'Vassili Bykov'. Please open **World->Help->TerseGuide** and see section **Regex** to get started. 
 
 
-## Extra
+## Changelog
 
-Last Update: please see commits.
+* 05-Dev-2021. I rollback the project to August state since I saw the changes I introduced in the last moths broke a lot of tests. 
+
+
