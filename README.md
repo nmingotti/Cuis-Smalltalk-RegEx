@@ -1,5 +1,4 @@
-Regex
-==========
+# Regex
 
 The package provides regular expressions support to Cuis
 
